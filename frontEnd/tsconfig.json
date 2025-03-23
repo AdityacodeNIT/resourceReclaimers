@@ -1,0 +1,19 @@
+{
+    
+     "compilerOptions": {
+  "baseUrl": "./",
+  "paths": {
+    "@components/*": ["src/components/*"],
+    "@context/*": ["src/context/*"]
+  },
+  "resolveJsonModule": true,
+  "isolatedModules": true,
+  "noEmit": true
+},
+
+    
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+  }
+
+  

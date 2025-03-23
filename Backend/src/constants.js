@@ -1,2 +1,1 @@
-export const DB_NAME = "Infinity";
-
+export const DB_NAME = "videotube";

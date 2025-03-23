@@ -39,7 +39,7 @@ const deleteFromCloudinary = async (localFilePath) => {
                         await cloudinary.uploader.destroy(localFilePath);
                 return deleate;
         } catch (error) {
-                console.log(error, "image is not deleted");
+                return null;
         }
 };
 

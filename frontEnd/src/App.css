@@ -1,0 +1,50 @@
+
+.productlist1 ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.aalu{
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.product-img{
+  width: 205px;
+  height: 205px;
+}
+.cart-btn{
+  float: right;
+}
+.img{
+ padding:10%;
+ margin:12%;
+ width: 96%;
+}
+
+.info1{
+  list-style-type: none;
+  width: 70%;
+}
+
+
+
+
+
+.Cartlist ul{
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.Cartlist{
+  width: 70%;
+  
+}
+
+.Cart-img img{
+  list-style-type: none;
+  width: 50%;
+}
+
