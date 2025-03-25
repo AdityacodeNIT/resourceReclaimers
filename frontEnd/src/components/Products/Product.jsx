@@ -57,14 +57,6 @@ const Product = () => {
         <div className="w-full md:w-1/2 space-y-6 text-center lg:text-left">
           <div className="text-3xl font-extrabold">{product.name}</div>
 
-          {/* Wishlist Button */}
-          <button
-            className="text-lg flex items-center justify-center lg:justify-start gap-2 text-red-500 font-semibold hover:text-red-600 transition"
-            onClick={() => addToFavourite(product._id)}
-          >
-            <FaHeart className="text-2xl" />
-            <span>Add to Wishlist</span>
-          </button>
 
           {/* Ratings */}
           <div className="text-2xl flex justify-center lg:justify-start gap-1">

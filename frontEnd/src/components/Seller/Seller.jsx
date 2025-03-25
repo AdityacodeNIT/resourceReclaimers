@@ -1,58 +1,135 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../../context/UserContext";
+import { FaChevronDown, FaChevronUp, FaPlusCircle, FaMapMarkerAlt } from "react-icons/fa";
+import axios from "axios";
 
 const Seller = () => {
-  const { sellerDetail } = useContext(UserContext);
+  const [products, setProducts] = useState([]);
+  const [address, setAddress] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [expandedProduct, setExpandedProduct] = useState(null);
+
+  const getAllRefurbished = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/refurbished/getProduct`,
+        { withCredentials: true }
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getAddress = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/address/getAddress`,
+        { withCredentials: true }
+      );
+      setAddress(response.data.data || null);
+    } catch (error) {
+      console.error("Error fetching address:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAddress();
+    getAllRefurbished();
+  }, []);
 
   return (
+    <div className="min-h-screen  w-full flex flex-col items-center bg-gradient-to-r from-blue-800 to-gray-500 p-4">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-5xl flex gap-8">
+        
+        {/* Left Side - Product List */}
+        <div className="w-2/3">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Refurbished Products</h2>
 
-      <div className="h-screen flex items-center justify-center bg-gradient-to-r from-blue-800 to-gray-500">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-96 text-center">
-        <h2 className="text-2xl font-bold text-gray-800">Become a Seller</h2>
-        <p className="text-gray-600 mt-2">
-          Start selling on our platform and reach thousands of customers!
-        </p>
-
-        <div className="mt-6 space-y-4">
-          {!sellerDetail ? (
-            <>
-              <Link
-                to="/sellerRegister"
-                className="block w-full py-2 bg-purple-800 text-white font-semibold rounded-lg hover:bg-purple-600 transition"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to="/sellerLogin"
-                className="block w-full py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition"
-              >
-                Login
-              </Link>
-            </>
+          {loading ? (
+            <p className="text-gray-600">Loading products...</p>
+          ) : products.length === 0 ? (
+            <p className="text-gray-600">No refurbished products listed yet.</p>
           ) : (
-            <div className="text-left bg-gray-100 p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900">
-                Welcome, {sellerDetail.data.user.fullName}!
-              </h3>
-              <p className="text-gray-700">📧 {sellerDetail.data.user.email}</p>
-              <p className="text-gray-700">👤 {sellerDetail.data.user.username}</p>
-              
-              {sellerDetail.data.user.approved ? (
-                <Link
-                  to="/addProduct"
-                  className="mt-4 block w-full py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-500 transition text-center"
-                >
-                  Add Product
-                </Link>
-              ) : (
-                <p className="mt-4 text-red-600 font-semibold">
-                  Your seller account is not approved yet.
-                </p>
-              )}
+            <div className="space-y-4">
+              {products.map((product) => (
+                <div key={product._id} className="flex items-center gap-4 border-b pb-4">
+                  
+                  {/* Product Image */}
+                  {product.productImages.length > 0 && (
+                    <img
+                      src={product.productImages[0]}
+                      alt={product.name}
+                      className="w-24 h-24 object-cover rounded-lg border"
+                    />
+                  )}
+
+                  {/* Product Details */}
+                  <div className="w-full">
+                    <div className="flex justify-between items-center cursor-pointer" 
+                         onClick={() => setExpandedProduct(expandedProduct === product._id ? null : product._id)}>
+                      <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+                      {expandedProduct === product._id ? <FaChevronUp /> : <FaChevronDown />}
+                    </div>
+
+                    <p className="text-sm font-bold text-gray-700">
+                      EvaluatedPrice: <span className="text-green-600">
+                        {product.evaluatedPrice && product.evaluatedPrice > 0 ? `₹${product.evaluatedPrice}` : "Evaluation in process"}
+                      </span>
+                    </p>
+
+                    {expandedProduct === product._id && (
+                      <div className="mt-2 text-left">
+                        <p className="text-sm text-gray-600">{product.description}</p>
+                        <p className="text-sm font-bold text-gray-700">
+                          Status: <span className="text-blue-600">{product.evaluationStatus}</span>
+                        </p>
+                        <p className="text-sm text-gray-600">Condition: {product.condition || "Not specified"}</p>
+                        <p className="text-sm text-gray-600">Category: {product.category || "Not specified"}</p>
+                        {product.originalPriceProof && (
+                          <p className="text-sm text-gray-600">
+                            Original Price Proof: <a href={product.originalPriceProof} className="text-blue-500 underline">View Proof</a>
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
+
+        {/* Right Side - Address & Add Product */}
+        <div className="w-1/3">
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-lg text-center">Your Address</h3>
+
+            {address ? (
+              <div className="mt-2 text-center">
+                <FaMapMarkerAlt className="text-blue-600 text-xl mb-2" />
+                <p>{address.firstName} {address.lastName}</p>
+                <p>{address.streetAddress}, {address.city}, {address.state} - {address.postalCode}</p>
+                <p>Phone: {address.phoneNumber}</p>
+              </div>
+            ) : (
+              <p className="mt-2 text-red-500 font-semibold text-center">⚠️ Add an address before listing products.</p>
+            )}
+          </div>
+
+          <Link
+            to={address ? "/addrefurbished" : "#"}
+            className={`mt-4 flex items-center justify-center gap-2 w-full py-2 text-white font-semibold rounded-lg transition text-center ${
+              address ? "bg-green-600 hover:bg-green-500" : "bg-gray-400 cursor-not-allowed"
+            }`}
+            onClick={(e) => { if (!address) e.preventDefault(); }}
+          >
+            <FaPlusCircle /> Add Product
+          </Link>
+        </div>
+
       </div>
     </div>
   );

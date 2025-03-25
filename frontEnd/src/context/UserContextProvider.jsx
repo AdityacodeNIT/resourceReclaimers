@@ -325,80 +325,6 @@ useEffect(() => {
     }
   };
 
-  // State to manage wishlist.
-  const [wishlist, setWishlist] = useState(() => ({
-    userId: userDetail?.data?.user?._id,
-    items: [],
-  }));
-
-  // Add item to wishlist.
-  const addToFavourite = async (itemId) => {
-    const updatedWishlist = {
-      ...wishlist,
-      items: [...wishlist.items, { productId: itemId, quantity: 1 }],
-    };
-
-    setWishlist(updatedWishlist); // Update state first
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v2/wishlist/addWishlist`,
-        updatedWishlist
-      );
-      if (response.data) {
-        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-      }
-    } catch (error) {
-      console.error("Error adding to wishlist:", error);
-    }
-  };
-
-  const removeFromWishlist = async (productId) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v2/wishlist/removeWishlistItem`,
-        {productId},
-        { withCredentials: true }
-
-      );
-     
-    } catch (error) {
-      console.error("Error fetching favourites:", error);
-    }
-  };
-  
-
-  const [myWishlist, setMyWishlist] = useState([]);
-
-  // Fetch wishlist items.
-  const fetchFavourites = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/v2/wishlist/Wishlists/${
-          userDetail.data.user._id
-        }`
-      );
-      if (response.data) {
-        setMyWishlist(response.data);
-      }
-    } catch (error) {
-      console.error("Error fetching favourites:", error);
-      setWishlist({ userId: userDetail?.data?.user?._id, items: [] });
-    }
-  };
-
-  
-
-  
-
-  // Fetch wishlist items whenever wishlist changes.
-  useEffect(() => {
-    if (userDetail?.data?.user?._id) {
-      fetchFavourites();
-    }
-  }, [wishlist,removeFromWishlist]);
-
-
 
 
   // State to manage product reviews.
@@ -481,6 +407,8 @@ useEffect(() => {
     }
   };
 
+  
+
   return (
     <UserContext.Provider
       value={{
@@ -513,9 +441,8 @@ useEffect(() => {
         setOrderSuccess,
         handleAddToCart,
         notification,
-        addToFavourite,
-        wishlist,
-        myWishlist,
+     
+     
         handleSearch,
         searchResult,
         orderDetails,
@@ -529,7 +456,6 @@ useEffect(() => {
         totalRatings,
         averageRatings,
         setAddressId,
-        removeFromWishlist,
         sellerDetail,
         getSellerDetail
       }}

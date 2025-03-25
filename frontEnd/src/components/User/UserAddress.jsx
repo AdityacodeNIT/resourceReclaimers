@@ -1,9 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 const UserAddress = () => {
+
   const navigate = useNavigate();
   const [AddressData, setAddressData] = useState({
     firstName: "",
@@ -42,6 +44,9 @@ const UserAddress = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+ 
+  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

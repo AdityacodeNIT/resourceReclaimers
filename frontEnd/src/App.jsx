@@ -19,13 +19,6 @@ import UserDetails from "./components/User/UserDetails.jsx";
 import Logout from "./components/User/Logout.jsx";
 
 
-import Paperproducts from "./components/Category component/Paperproducts.jsx";
-import Desksupply from "./components/Category component/Desksupply.jsx";
-import Reusable from "./components/Category component/Reusable.jsx";
-import Filling from "./components/Category component/Filling.jsx";
-
-
-import Writing from "./components/Category component/Writing.jsx";
 import BuyProduct from "./components/Products/BuyProduct.jsx";
 import UserAddress from "./components/User/UserAddress.jsx";
 import Payment from "./components/Payment/Payment.jsx";
@@ -35,7 +28,6 @@ removeEventListener;
 import Helpdesk from "./components/App/Helpdesk.jsx";
 import AddProduct from "./components/Products/AddProduct.jsx";
 import UserUpdateDetails from "./components/User/UserUpdateDetails.jsx";
-import Wishlisted from "./components/Products/Wishllisted.jsx";
 import SearchResult from "./components/App/SearchResult.jsx";
 import ChangePassword from "./components/User/ChangePassword.jsx";
 import UpdateUserAccountDetails from "./components/User/UpdateUserAccountDetails.jsx";
@@ -54,6 +46,9 @@ import SellerRegister from "./components/Seller/SellerRegister.jsx";
 import Sellerlogin from "./components/Seller/SellerLogin.jsx";
 import AdminDashboard from "./components/Admin/AdminDashboard.jsx";
 import ManageSellers from "./components/Admin/ManageSellers.jsx";
+import AddRefurbishedProduct from "./components/Products/AddRefurbishedProduct.jsx";
+import AdminProductReview from "./components/Admin/AdminProductReview.jsx";
+import RefurbsihedControl from "./components/Admin/Refurbished/RefurbishedControl.jsx";
 
 
 function App() {
@@ -73,14 +68,10 @@ function App() {
           <Route path="/userLogin" element={<Userlogin />} />
           <Route path="/user" element={<UserDetails />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/PaperProducts" element={<Paperproducts />} />
-          <Route path="/DeskSupplies" element={<Desksupply />} />
-          <Route path="/ReusableProducts" element={<Reusable />} />
-          <Route path="/Filing&Storage" element={<Filling />} />
-          <Route path="/WritingInstruments" element={<Writing />} />
+         
           <Route path="/BuyProduct" element={<BuyProduct />} />
           <Route path="/addressUpdate" element={<UserAddress />} />
-          <Route path="/wishlist" element={<Wishlisted />} />
+  
           <Route path="/payments" element={<Payment />} />
           <Route path="/helpdesk" element={<Helpdesk />} />
           <Route path="/AddProduct" element={<AddProduct />} />
@@ -98,9 +89,12 @@ function App() {
           <Route path="/seller" element={<Seller/>} />
           <Route path="/sellerRegister" element={<SellerRegister/>} />
           <Route path="/sellerlogin" element={<Sellerlogin/>} />
+          <Route path="/addRefurbished" element={<AddRefurbishedProduct />} />
           <Route path="/admina" element={<AdminDashboard />}/>
+          <Route path="/refurbsihedControl" element={<RefurbsihedControl/>}/>
           
                     <Route path="/sellers" element={<ManageSellers />} />
+                    <Route path="/adminProductReview" element={<AdminProductReview />} />
         </Routes>
         <KeepAlive />
         <SpeedInsights />

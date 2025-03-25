@@ -56,10 +56,10 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col md:flex-row bg-gradient-to-r mt-2 from-blue-800 to-gray-500">
+    <div className="h-screen flex flex-col   mt-2 bg-green-400">
       {/* Left section - Register form */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-4">
-        <div className="w-full md:w-3/4 p-8 bg-purple-400 shadow-xl rounded-lg border border-white-300">
+      <div className=" flex flex-col justify-center items-center p-4">
+        <div className="w-1/3 p-8 bg-green-300 shadow-xl rounded-lg border border-white-300">
           <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-6">
             Register
           </h1>
@@ -71,7 +71,7 @@ const Register = () => {
               value={formData.fullName}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600 focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200  focus:outline-none focus:border-blue-600"
             />
             <input
               type="email"
@@ -80,7 +80,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600 focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 focus:outline-none focus:border-blue-600"
             />
             <input
               type="text"
@@ -105,7 +105,7 @@ const Register = () => {
               name="avatar"
               onChange={handleFileChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600  focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200   focus:outline-none focus:border-blue-600"
             />
             {/* Add input for cover image if needed */}
             {/* <input type="file" name="coverImage" onChange={handleFileChange} /> */}
@@ -125,14 +125,8 @@ const Register = () => {
         </div>
       </div>
 
-      {/* Right section - Image */}
-      <div className="hidden md:block md:w-1/2">
-        <img
-          src="/assets/design/register.jpeg" // Update with your image path
-          alt="Register Page Illustration"
-          className="w-full h-screen object-cover"
-        />
-      </div>
+      
+     
     </div>
   );
 };

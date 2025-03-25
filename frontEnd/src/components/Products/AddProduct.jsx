@@ -101,12 +101,16 @@ const AddProduct = () => {
         {/* Category Selection */}
         <select name="Category" value={ProductData.Category} onChange={handleInputChange} className="mt-3 border-2 border-cyan-600 w-full p-3 rounded-md">
           <option value="">Select Category</option>
-          <option value="Writing">Writing</option>
-          <option value="Paper">Paper</option>
-          <option value="DeskSupplies">Desk Supplies</option>
-          <option value="Filing">Filing</option>
-          <option value="Reusable">Reusable</option>
-          <option value="TechStationery">Tech Stationery</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Appliances">Appliances</option>
+          <option value="Automotive">AutomotiveParts</option>
+          <option value="HomeDecor">Home Decor</option>
+          <option value="OfficeEuipment">Office Equipment</option>
+          <option value="SportsEquipment">Sports Equipment</option>
+          <option value="ClothingAndAccessories">Clothing And Accessories</option>
+          <option value="BooksAndStationery">Books And Stationery</option>
+          <option value="Miscellaneous">Miscellaneous</option>
         </select>
 
         {/* Manual Attribute Selection */}

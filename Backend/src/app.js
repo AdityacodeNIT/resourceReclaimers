@@ -25,12 +25,13 @@ import productRouter from "./routes/product.routes.js";
 import addressRouter from "./routes/address.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 import Reviewrouter from "./routes/review.routes.js";
-import WishListRouter from "./routes/wishlist.routes.js";
+
 
 import shiprouter from "./routes/shiprocket.routes.js";
 import interactionRouter from "./routes/interaction.routes.js";
 import Subscriberouter from "./routes/subscriber.routes.js";
 import sellerRouter from "./routes/seller.routes.js";
+import refurbishRouter from "./routes/refurbished.routes.js";
 
 
 
@@ -42,10 +43,10 @@ app.use("/api/v1/product", productRouter);
 app.use("/api/v1/address", addressRouter);
 app.use("/api/v2/payments", paymentRouter);
 app.use("/api/v2/feedback", Reviewrouter);
-app.use("/api/v2/wishlist", WishListRouter);
 app.use("/shiprocket", shiprouter);
 app.use("/api/activity",interactionRouter);
 app.use("/api/v1", Subscriberouter);
+app.use("/api/v1/refurbished",refurbishRouter);
 
 
 

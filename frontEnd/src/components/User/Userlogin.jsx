@@ -49,11 +49,11 @@ const Userlogin = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col md:flex-row bg-gradient-to-r from-pink-400 mt-2 to-purple-500">
+    <div className="h-screen flex flex-col md:flex-row bg-gradient-to-r from-green-300 to-green-100 mt-2">
       {/* Left section - Login form */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-4">
-        <div className="w-full md:w-3/4 p-8 bg-pink-300 shadow-xl rounded-lg border border-white">
-          <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-6">
+        <div className="w-full md:w-3/4 p-8 bg-green-200 shadow-xl rounded-lg border border-white">
+          <h1 className="text-3xl font-extrabold text-green-700 text-center mb-6">
             Login
           </h1>
           <form onSubmit={handleFormSubmit} encType="multipart/form-data">
@@ -65,7 +65,7 @@ const Userlogin = () => {
                 value={loginData.username}
                 onChange={handleInputChange}
                 required
-                className="p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 focus:outline-none bg-gray-600 focus:border-rose-600"
+                className="p-2 w-full border-2 border-green-400 rounded-md transition duration-200 focus:outline-none bg-gray-100 focus:border-green-600"
               />
               {errorMessage && !loginData.username && (
                 <p className="text-red-600 text-sm mt-1">{errorMessage}</p>
@@ -79,7 +79,7 @@ const Userlogin = () => {
                 value={loginData.password}
                 onChange={handleInputChange}
                 required
-                className="p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 focus:outline-none bg-gray-600 focus:border-rose-600"
+                className="p-2 w-full border-2 border-green-400 rounded-md transition duration-200 focus:outline-none bg-gray-100 focus:border-green-600"
               />
               {errorMessage && loginData.username && (
                 <p className="text-red-600 text-sm mt-1">{errorMessage}</p>
@@ -87,7 +87,7 @@ const Userlogin = () => {
             </div>
             <button
               type="submit"
-              className="w-full p-3 bg-blue-800 text-white font-bold rounded-md transition duration-200 hover:bg-rose-600"
+              className="w-full p-3 bg-green-500 text-white font-bold rounded-md transition duration-200 hover:bg-green-400"
             >
               Login
             </button>
@@ -98,7 +98,7 @@ const Userlogin = () => {
       {/* Right section - Image */}
       <div className="hidden md:block md:w-1/2">
         <img
-          src="/assets/design/login.jpeg"
+          src="/assets/design/login.webp"
           alt="Login Page Illustration"
           className="w-full h-screen object-cover"
         />
