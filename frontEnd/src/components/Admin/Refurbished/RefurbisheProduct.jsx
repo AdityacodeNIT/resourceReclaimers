@@ -10,7 +10,7 @@ const RefurbishedProduct = () => {
 
   // State for evaluation update
   const [evaluatedPrice, setEvaluatedPrice] = useState("");
-  const [evaluationStatus, setEvaluationStatus] = useState("");
+  const [evaluationStatus, setEvaluationStatus] = useState("Pending");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,7 +40,7 @@ const RefurbishedProduct = () => {
 
   const handleUpdateProduct = async (productId) => {
     try {
-      await axios.put(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/refurbished/updateProduct/${productId}`,
         { evaluatedPrice, evaluationStatus },
         { withCredentials: true }
@@ -123,7 +123,12 @@ const RefurbishedProduct = () => {
                         {product.originalPriceProof && (
                           <>
                             <h3 className="font-semibold mt-2">Original Price Proof:</h3>
-                            <img src={product.originalPriceProof} alt="Original Price Proof" className="w-24 h-24 object-cover rounded-md" />
+                            <img
+                              src={product.originalPriceProof}
+                              alt="Original Price Proof"
+                              className="w-24 h-24 object-cover rounded-md cursor-pointer hover:scale-105 transition"
+                              onClick={() => setExpandedImage(product.originalPriceProof)}
+                            />
                           </>
                         )}
                       </div>
@@ -162,6 +167,25 @@ const RefurbishedProduct = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Image Modal */}
+      {expandedImage && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative">
+            <img
+              src={expandedImage}
+              alt="Expanded Product"
+              className="max-w-full max-h-screen rounded-lg"
+            />
+            <button
+              className="absolute top-2 right-2 bg-white text-black p-2 rounded-full"
+              onClick={() => setExpandedImage(null)}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

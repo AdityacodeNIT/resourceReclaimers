@@ -66,7 +66,7 @@ const AddProduct = () => {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/product/addProduct`,
         formDataToSend,
-        { headers: { "Content-Type": "multipart/form-data" } }
+       {withCredentials:true}
       );
 
       setMessage("Product added successfully!");

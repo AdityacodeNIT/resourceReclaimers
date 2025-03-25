@@ -9,12 +9,16 @@ const ProductSchema = new Schema(
         Category: {
             type: String,
             enum: [
-                "Writing",        // Pens, Markers, Stylus
-                "Paper",          // Notebooks, Sticky Notes, Recycled Paper
-                "DeskSupplies",   // Calculators, Digital Notepads, Pen Holders
-                "Filing",         // Folders, Binders, Files
-                "Reusable",       // Smart Notebooks, Erasable Pens
-                "TechStationery", // Digital writing pads, Smart Pens, E-Ink Tablets
+                "Electronics",        // Smartphones, Laptops, Tablets, E-Waste
+                "Furniture",          // Chairs, Desks, Cabinets
+                "Appliances",         // Refrigerators, Washing Machines, Air Conditioners
+                "AutomotiveParts",    // Used Car Parts, Batteries, Tires
+                "HomeDecor",          // Lamps, Mirrors, Frames
+                "OfficeEquipment",    // Printers, Scanners, Projectors
+                "SportsEquipment",    // Gym Equipment, Bicycles, Treadmills
+                "ClothingAndAccessories", // Shoes, Bags, Watches
+                "BooksAndStationery", // Used Books, Notebooks, Recycled Paper
+                "Miscellaneous" , // Digital writing pads, Smart Pens, E-Ink Tablets
             ],
             required: true,
         },
