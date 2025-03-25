@@ -14,11 +14,13 @@ const ProductList = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/v1/product/getProduct`
       );
-      if (response) {
-        setProductsData(response.data);
-      }
+      console.log("API Response:", response.data); // Debugging
+  
+      // Ensure productsData is always an array
+      setProductsData(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Failed to fetch products", error);
+      setProductsData([]); // Ensure it's an empty array even on error
     }
   };
 
@@ -41,7 +43,7 @@ const ProductList = () => {
         {/* Product Grid */}
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {productsData.map((product) => (
+            {productsData&& productsData.map((product) => (
               <div
                 key={product._id}
                 className="relative bg-gradient-to-br from-pink-200 via-gray-100 to-gray-200 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1"

@@ -70,8 +70,9 @@ const getAddress = asyncHandler(async (req, res) => {
                         .json(
                                 new ApiResponse(
                                         200,
-                                        "No address found for this user",
                                         null,
+                                        "No address found for this user",
+                                       
                                 ),
                         );
         }

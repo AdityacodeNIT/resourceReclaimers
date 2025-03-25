@@ -29,7 +29,10 @@ const Seller = () => {
         `${import.meta.env.VITE_API_URL}/api/v1/address/getAddress`,
         { withCredentials: true }
       );
+      if(response){
       setAddress(response.data.data || null);
+      console.log(response);
+      }
     } catch (error) {
       console.error("Error fetching address:", error);
     }
@@ -41,7 +44,7 @@ const Seller = () => {
   }, []);
 
   return (
-    <div className="min-h-screen  w-full flex flex-col items-center bg-gradient-to-r from-blue-800 to-gray-500 p-4">
+    <div className="min-h-screen w-full flex flex-col items-center bg-gradient-to-r from-blue-800 to-gray-500 p-4">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-5xl flex gap-8">
         
         {/* Left Side - Product List */}
@@ -86,7 +89,7 @@ const Seller = () => {
                         <p className="text-sm font-bold text-gray-700">
                           Status: <span className="text-blue-600">{product.evaluationStatus}</span>
                         </p>
-                        <p className="text-sm text-gray-600">Condition: {product.condition || "Not specified"}</p>
+                        <p className="text-sm text-gray-600">Condition: {product.sellerDeclaredCondition || "Not specified"}</p>
                         <p className="text-sm text-gray-600">Category: {product.category || "Not specified"}</p>
                         {product.originalPriceProof && (
                           <p className="text-sm text-gray-600">
@@ -115,19 +118,26 @@ const Seller = () => {
                 <p>Phone: {address.phoneNumber}</p>
               </div>
             ) : (
-              <p className="mt-2 text-red-500 font-semibold text-center">⚠️ Add an address before listing products.</p>
+              <div className="text-center mt-2">
+                <p className="text-red-500 font-semibold">⚠️ Add an address before listing products.</p>
+                <Link
+                  to="/addressUpdate"
+                  className="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition"
+                >
+                  Add Address
+                </Link>
+              </div>
             )}
           </div>
 
-          <Link
-            to={address ? "/addrefurbished" : "#"}
-            className={`mt-4 flex items-center justify-center gap-2 w-full py-2 text-white font-semibold rounded-lg transition text-center ${
-              address ? "bg-green-600 hover:bg-green-500" : "bg-gray-400 cursor-not-allowed"
-            }`}
-            onClick={(e) => { if (!address) e.preventDefault(); }}
-          >
-            <FaPlusCircle /> Add Product
-          </Link>
+          {address && (
+            <Link
+              to="/addrefurbished"
+              className="mt-4 flex items-center justify-center gap-2 w-full py-2 text-white font-semibold rounded-lg bg-green-600 hover:bg-green-500 transition text-center"
+            >
+              <FaPlusCircle /> Add Product
+            </Link>
+          )}
         </div>
 
       </div>
