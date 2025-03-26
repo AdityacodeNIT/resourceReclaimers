@@ -22,7 +22,7 @@ const Home = () => {
         <div className="w-full">
             {/* Hero Section */}
             <div className="relative w-full h-[70vh] bg-cover bg-center flex items-center justify-center text-white text-center px-6" 
-                style={{ backgroundImage: "url('https://plus.unsplash.com/premium_photo-1663956066898-282c7609afc9?w=1600&auto=format&fit=crop&q=80')" }}>
+                style={{ backgroundImage: "url('https://th.bing.com/th/id/OIP.J42fGy9vF2gBFyv2SUviaQHaEK?w=303&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7')" }}>
                 <div className="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-md">
                     <h1 className="text-5xl md:text-7xl font-extrabold drop-shadow-lg">Refurbish Reuse Recycle</h1>
                    
