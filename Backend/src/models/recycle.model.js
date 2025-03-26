@@ -11,6 +11,11 @@ const recyclingSchema = new Schema({
   adminName: { type: String, required: true },
   adminContact: { type: String, required: true },
   adminEmail: { type: String, required: true },
+  adminId:{
+    type:Schema.Types.ObjectId,
+    ref:"user",
+    required:true
+  },
 
   capacity: { type: Number, required: true }, // Total warehouse capacity
   currentWasteVolume: { type: Number, required: true }, // Current waste stored
@@ -25,6 +30,7 @@ const recyclingSchema = new Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   revenueReceived: { type: Number, required: true },
+
 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

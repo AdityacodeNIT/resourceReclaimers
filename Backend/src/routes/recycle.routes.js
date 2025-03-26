@@ -7,13 +7,16 @@ import {
   deleteRecycling
 } from '../controllers/recycle.controller.js';
 import { verifyJWT } from '../middlewares/auth.middleware.js';
+import { verifyRole } from '../middlewares/role.middleware.js';
 
 const router = express.Router();
 
 router.route("/create").post(verifyJWT ,createRecycling);
-router.get('/', getAllRecycling);
+router.route("/get").get(verifyJWT ,verifyRole(["admin", "superadmin"]) , getAllRecycling);
+router.route("/update/:id").post(verifyJWT ,verifyRole(["admin", "superadmin"]) , updateRecycling);
+
 router.get('/:id', getRecyclingById);
-router.put('/:id', updateRecycling);
+
 router.delete('/:id', deleteRecycling);
 
 export default router;

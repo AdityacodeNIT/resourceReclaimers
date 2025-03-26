@@ -2,8 +2,13 @@ import { Recycling } from "../models/recycle.model.js";
 
 // Create a new recycling record
 export const createRecycling = async (req, res) => {
+
   try {
-    const recycling = new Recycling(req.body);
+    const recycling = new Recycling({
+        ...req.body,
+        adminId:req.user.id,
+
+  });
     await recycling.save();
     res.status(200).json(recycling);
   } catch (error) {
@@ -14,7 +19,7 @@ export const createRecycling = async (req, res) => {
 // Get all recycling records
 export const getAllRecycling = async (req, res) => {
   try {
-    const records = await Recycling.find();
+    const records = await Recycling.find({adminId:req.user.id});
     res.status(200).json(records);
   } catch (error) {
     res.status(500).json({ error: error.message });
