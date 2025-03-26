@@ -91,7 +91,7 @@ function App() {
           <Route path="/sellerlogin" element={<Sellerlogin/>} />
           <Route path="/addRefurbished" element={<AddRefurbishedProduct />} />
           <Route path="/admina" element={<AdminDashboard />}/>
-          <Route path="/refurbsihedControl" element={<RefurbsihedControl/>}/>
+          <Route path="/refurbishedControl" element={<RefurbsihedControl/>}/>
           
                     <Route path="/sellers" element={<ManageSellers />} />
                     <Route path="/adminProductReview" element={<AdminProductReview />} />
