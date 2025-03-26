@@ -56,11 +56,11 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col   mt-2 bg-green-400">
+    <div className="h-screen flex flex-col ">
       {/* Left section - Register form */}
       <div className=" flex flex-col justify-center items-center p-4">
-        <div className="w-1/3 p-8 bg-green-300 shadow-xl rounded-lg border border-white-300">
-          <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-6">
+        <div className="w-1/3 p-8 shadow-xl rounded-lg border border-white-300">
+          <h1 className="text-3xl font-extrabold text-gray-800 text-center mb-6">
             Register
           </h1>
           <form onSubmit={handleFormSubmit} encType="multipart/form-data">
@@ -71,7 +71,7 @@ const Register = () => {
               value={formData.fullName}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200  focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200  focus:outline-none focus:border-gray-800"
             />
             <input
               type="email"
@@ -80,7 +80,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 focus:outline-none focus:border-gray-800"
             />
             <input
               type="text"
@@ -89,7 +89,7 @@ const Register = () => {
               value={formData.username}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600  focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600  focus:outline-none focus:border-gray-800"
             />
             <input
               type="password"
@@ -98,20 +98,19 @@ const Register = () => {
               value={formData.password}
               onChange={handleInputChange}
               required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600 focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200 bg-gray-600 focus:outline-none focus:border-gray-800"
             />
             <input
               type="file"
               name="avatar"
               onChange={handleFileChange}
-              required
-              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200   focus:outline-none focus:border-blue-600"
+              className="mb-4 p-2 w-full border-2 border-rose-400 rounded-md transition duration-200   focus:outline-none focus:border-gray-800"
             />
             {/* Add input for cover image if needed */}
             {/* <input type="file" name="coverImage" onChange={handleFileChange} /> */}
             <button
               type="submit"
-              className="w-full p-3 bg-blue-600 text-white font-bold rounded-md transition duration-200 hover:bg-rose-700"
+              className="w-full p-2.5 bg-gray-800 text-white font-bold rounded-md transition duration-200"
             >
               Register
             </button>
