@@ -60,7 +60,7 @@ const UserAddress = () => {
       );
 
       if (response.status === 201) {
-        navigate("/BuyProduct");
+        navigate("/Seller");
       }
     } catch (error) {
       console.log("Issue in Adding the Addresses:", error);
