@@ -49,6 +49,7 @@ import ManageSellers from "./components/Admin/ManageSellers.jsx";
 import AddRefurbishedProduct from "./components/Products/AddRefurbishedProduct.jsx";
 import AdminProductReview from "./components/Admin/AdminProductReview.jsx";
 import RefurbsihedControl from "./components/Admin/Refurbished/RefurbishedControl.jsx";
+import Dashboard from "./components/Admin/Recycling/DashBoard.jsx";
 
 
 function App() {
@@ -91,10 +92,11 @@ function App() {
           <Route path="/sellerlogin" element={<Sellerlogin/>} />
           <Route path="/addRefurbished" element={<AddRefurbishedProduct />} />
           <Route path="/admina" element={<AdminDashboard />}/>
-          <Route path="/refurbsihedControl" element={<RefurbsihedControl/>}/>
+          <Route path="/refurbishedControl" element={<RefurbsihedControl/>}/>
           
                     <Route path="/sellers" element={<ManageSellers />} />
                     <Route path="/adminProductReview" element={<AdminProductReview />} />
+                    <Route path="/recycle" element={<Dashboard/>}/>
         </Routes>
         <KeepAlive />
         <SpeedInsights />
