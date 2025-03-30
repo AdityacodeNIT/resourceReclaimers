@@ -67,6 +67,13 @@ const UserDetails = () => {
                       Admin Panel
                     </Link>
 
+                    <Link to="/refurbishedControl" className="flex items-center text-gray-600 font-semibold hover:text-indigo-500 transition">
+                      <FaUser className="text-purple-500 mr-2" />
+                      Product Review
+                    </Link>
+
+
+
                     <Link to="/helpdesk" className="flex items-center text-gray-600 font-semibold hover:text-red-600 transition">
                       <FaHeadset className="text-purple-500 mr-2" />
                       Helpdesk

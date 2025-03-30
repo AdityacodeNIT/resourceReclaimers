@@ -8,16 +8,6 @@ import SubscribeSection from "../User/SubscribeSection";
 import ProductList from "../Products/ProductList";
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
-    const [recommendations, setRecommendations] = useState([]);
-    const { childToParent } = useContext(UserContext);
-
- 
-
-   
-
-   
-
     return (
         <div className="w-full">
             {/* Hero Section */}

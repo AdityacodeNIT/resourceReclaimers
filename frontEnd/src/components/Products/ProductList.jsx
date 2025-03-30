@@ -32,19 +32,7 @@ const ProductList = () => {
       <Reminder />
 
       {/* Hero Banner */}
-      <div
-        className="bg-cover bg-center w-full h-96 flex items-center justify-center text-white text-center px-6"
-        style={{ backgroundImage: 'url("/src/assets/design/d.jpg")' }}
-      >
-        <div className="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-md">
-          <h1 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg">
-            Discover Our Best Refurbished Products
-          </h1>
-          <p className="mt-3 text-lg opacity-80">
-            Handpicked and Quality-Checked for You
-          </p>
-        </div>
-      </div>
+    
 
       {/* Product Grid */}
       <div className="container mx-auto px-6 py-12">

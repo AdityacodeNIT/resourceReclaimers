@@ -45,10 +45,17 @@ const Navbar = () => {
 
           {/* Sell Products Link */}
           <div>
-            <Link to="/seller" className="text-white text-lg font-medium hover:text-gray-400 transition duration-200">
-              Sell Your Products
-            </Link>
-          </div>
+  <Link 
+    to="/seller" 
+    className="text-lime-400 text-lg font-semibold transition duration-300 
+               rounded-md bg-gray-900  p-2 shadow-lg 
+               drop-shadow-[0_0_10px_rgba(163,230,53,0.9)]"
+  >
+    Sell Refurbished
+  </Link>
+</div>
+
+
 
           {/* Search Bar */}
           <div className="w-full md:w-auto">
