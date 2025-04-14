@@ -84,7 +84,7 @@ const UserContextProvider = ({ children }) => {
   // Reducing item quantity in the cart or removing it.
   const removingElements = (productId) => {
     const removingCartItems = cartItems.map((item) =>
-      item.quantity >= 2 && item._id === productId
+      (item.quantity >= 2 && item._id.toString() === productId)
         ? { ...item, quantity: item.quantity - 1 }
         : item
     );

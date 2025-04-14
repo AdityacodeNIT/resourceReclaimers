@@ -32,7 +32,9 @@ import interactionRouter from "./routes/interaction.routes.js";
 import Subscriberouter from "./routes/subscriber.routes.js";
 import refurbishRouter from "./routes/refurbished.routes.js";
 import recycleRouter from "./routes/recycle.routes.js"
+import { listenForChanges } from "./utils/Supbase.js";
 
+listenForChanges();
 
 app.use("/api/v1/users", userRouter);
 

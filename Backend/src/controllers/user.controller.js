@@ -202,45 +202,52 @@ const logOutUser = asyncHandler(async (req, res) => {
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-        const incomingrefreshToken = req.cookies.refreshToken;
-        if (!incomingrefreshToken) {
+        const incomingRefreshToken = req.cookies.refreshToken;
+        if (!incomingRefreshToken) {
             throw new ApiError(401, "Unauthorized Request");
         }
     
         try {
+            // Verify the refresh token
             const decodedToken = Jwt.verify(
-                incomingrefreshToken,
+                incomingRefreshToken,
                 process.env.REFRESH_TOKEN_SECRET
             );
     
+            // Find the user based on the ID from the refresh token
             const user = await User.findById(decodedToken?._id);
             if (!user) {
                 throw new ApiError(401, "Invalid refresh token");
             }
     
             // 🔴 Check if the refresh token matches the one stored in the database
-            if (incomingrefreshToken !== user.refreshToken) {
+            if (incomingRefreshToken !== user.refreshToken) {
                 throw new ApiError(401, "Refresh token is expired or does not match");
             }
     
-            // Generate new tokens
-            const { accessToken, refreshToken } = await generateAccessAndRefreshtoken(user._id);
+            // Here, check if the access token has expired (you can store the expiration time in the JWT payload)
+            const currentAccessToken = req.cookies.accessToken;  // Assuming you have access to the current access token
+            try {
+                Jwt.verify(currentAccessToken, process.env.ACCESS_TOKEN_SECRET);  // Try to verify it
+                
+                // If the access token is still valid, no need to refresh
+                return res.status(200).json(new ApiResponse(200, "Access token is still valid"));
+            } catch (err) {
+                // If the access token is invalid or expired, generate a new one
+                const { accessToken } = await user.generateAccessToken();
+                
+                // Send the new access token as a cookie and in the response
+                const options = {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production", // Only true in production for HTTPS
+                    sameSite: "None",
+                };
     
-            // 🔵 Update the stored refresh token
-            user.refreshToken = refreshToken;
-            await user.save();
-    
-            const options = {
-                httpOnly: true,
-                secure: true,
-                sameSite: "None",
-            };
-    
-            return res
-                .status(200)
-                .cookie("accessToken", accessToken, options)
-                .cookie("refreshToken", refreshToken, options)
-                .json(new ApiResponse(200, { accessToken, refreshToken }, "Tokens refreshed successfully"));
+                return res
+                    .status(200)
+                    .cookie("accessToken", accessToken, options)  // Set the new access token cookie
+                    .json(new ApiResponse(200, { accessToken }, "Access token refreshed successfully"));
+            }
         } catch (error) {
             console.error("Error during token refresh:", error);
     
@@ -251,6 +258,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             throw new ApiError(401, error.message || "Invalid refresh token");
         }
     });
+    
     
 
 const changePassword = asyncHandler(async (req, res) => {
