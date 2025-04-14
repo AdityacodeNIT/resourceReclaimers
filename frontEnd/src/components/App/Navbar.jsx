@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCartFlatbed,    faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 import SearchBar from "./SearchBar";
 
@@ -10,13 +10,13 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="navbar w-full bg-gray-900 text-white shadow-md px-6 h-20">
+    <nav className="navbar w-full bg-gray-800 text-white shadow-md px-6 h-20">
       <div className="flex items-center justify-between w-full h-full">
         
         {/* Logo */}
         <div className="text-2xl lg:text-3xl font-bold italic tracking-wide">
           <span className="bg-gradient-to-r from-gray-400 to-gray-200 text-transparent bg-clip-text">
-            Resource<span className="text-4xl font-semibold">R</span>eclaimers
+            Resource<span className="text-4xl text-green-400 font-semibold">R</span>eclaimers
           </span>
         </div>
 
@@ -68,7 +68,7 @@ const Navbar = () => {
           
           {/* Shopping Cart */}
           <Link to="/cart" className="text-white bg-gray-700 hover:bg-gray-500 text-lg p-2 rounded-lg transition duration-300">
-            <FontAwesomeIcon icon={faShoppingCart} />
+          <FontAwesomeIcon icon={faCartFlatbed} />
           </Link>
 
           {/* User Avatar or Login/Register */}

@@ -50,6 +50,7 @@ import AddRefurbishedProduct from "./components/Products/AddRefurbishedProduct.j
 import AdminProductReview from "./components/Admin/AdminProductReview.jsx";
 import RefurbsihedControl from "./components/Admin/Refurbished/RefurbishedControl.jsx";
 import Dashboard from "./components/Admin/Recycling/DashBoard.jsx";
+import Todos from "./compo/Todos.jsx";
 
 
 function App() {
@@ -97,7 +98,11 @@ function App() {
                     <Route path="/sellers" element={<ManageSellers />} />
                     <Route path="/adminProductReview" element={<AdminProductReview />} />
                     <Route path="/recycle" element={<Dashboard/>}/>
+
+            <Route path="/todo" element={<Todos/>}/>      
+                    
         </Routes>
+     
         <KeepAlive />
         <SpeedInsights />
       </BrowserRouter>

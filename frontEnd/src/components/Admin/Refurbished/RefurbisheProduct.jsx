@@ -11,6 +11,7 @@ const RefurbishedProduct = () => {
   // State for evaluation update
   const [evaluatedPrice, setEvaluatedPrice] = useState("");
   const [evaluationStatus, setEvaluationStatus] = useState("Pending");
+  const [remarks, setRemarks] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,13 +37,15 @@ const RefurbishedProduct = () => {
     setExpandedProduct(expandedProduct === product._id ? null : product._id);
     setEvaluatedPrice(product.evaluatedPrice || "");
     setEvaluationStatus(product.evaluationStatus || "Pending");
+    setRemarks(product.remarks || "");
+
   };
 
   const handleUpdateProduct = async (productId) => {
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/refurbished/updateProduct/${productId}`,
-        { evaluatedPrice, evaluationStatus },
+        { evaluatedPrice, evaluationStatus,remarks },
         { withCredentials: true }
       );
 
@@ -151,6 +154,14 @@ const RefurbishedProduct = () => {
                             <option value="Under Review">Under Review</option>
                             <option value="Completed">Completed</option>
                           </select>
+                          <textarea
+                            placeholder="Remarks"
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+                            className="border p-2 rounded"
+                            rows="3"
+                          ></textarea>
+
                           <button
                             onClick={() => handleUpdateProduct(product._id)}
                             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"

@@ -90,13 +90,18 @@ export const getPendingBuyProducts = async (req, res) => {
 // Update product evaluation (admin updates price & status)
 export const updateBuyProduct = async (req, res) => {
   try {
-    const { evaluatedPrice, evaluationStatus } = req.body;
+    const { evaluatedPrice, evaluationStatus,remarks } = req.body;
     const product = await BuyProduct.findById(req.params.id);
     
     if (!product) return res.status(404).json({ error: "Product not found" });
     
     product.evaluatedPrice = evaluatedPrice;
     product.evaluationStatus = evaluationStatus;
+    product.evaluationRemarks=remarks;
+    product.evaluationDate = Date.now(); // Set evaluation date to current date
+
+
+
     await product.save();
     
     res.status(200).json({ message: "Product updated successfully", product });

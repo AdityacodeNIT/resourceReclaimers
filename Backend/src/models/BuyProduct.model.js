@@ -51,6 +51,8 @@ const BuyProductSchema = new Schema(
         originalPriceProof: { type: String }, 
         evaluatedPrice: { type: Number,default:0,required:true }, 
         evaluationStatus: { type: String, enum: ["Pending", "Under Review", "Completed"], default: "Pending",required:true },
+        evaluationRemarks: { type: String, default: "Pending" },
+        evaluationDate: { type: Date },
 
         // **Logistics & Tracking**
         pickupAgent: { type: Schema.Types.ObjectId, ref: "user" }, // Agent handling pickup

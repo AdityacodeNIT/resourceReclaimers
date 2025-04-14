@@ -93,7 +93,9 @@ const Seller = () => {
                             <span className="font-semibold">Original Price Proof:</span> 
                             <a href={product.originalPriceProof} className="text-blue-500 underline ml-1">View Proof</a>
                           </p>
+                       
                         )}
+                            <p><span className="font-semibold">Reviewers remark:</span> {product.evaluationRemarks || "Not specified"}</p>
                       </div>
                     )}
                   </div>
