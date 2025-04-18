@@ -28,7 +28,7 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-r bg-green-50 to-bg-white">
       <Reminder />
 
       {/* Hero Banner */}

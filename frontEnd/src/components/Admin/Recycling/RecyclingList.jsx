@@ -7,7 +7,7 @@ const RecyclingList = ({ onEdit, refreshData }) => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/recycling");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/recycling`);
         setRecords(res.data);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -18,7 +18,7 @@ const RecyclingList = ({ onEdit, refreshData }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/recycling/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/recycling/${id}`);
       refreshData();
     } catch (error) {
       console.error("Error deleting data", error);

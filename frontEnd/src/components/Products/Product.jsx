@@ -32,7 +32,7 @@ const Product = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleFormClick();
+  
   };
 
   return (

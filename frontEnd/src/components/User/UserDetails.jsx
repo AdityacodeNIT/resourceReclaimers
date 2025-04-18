@@ -18,10 +18,9 @@ const UserDetails = () => {
 
   useEffect(() => {
     const validateRefreshToken = async () => {
-      if (!userDetail) return; // Prevents API call if userDetail is null or not available
+      if (!userDetail) return;
 
       try {
-        // Check if accessToken needs refresh, perform refresh if needed
         const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/api/v1/users/refresh-token`,
           {},
@@ -36,21 +35,18 @@ const UserDetails = () => {
         }
       } catch (error) {
         console.error("Error validating refresh token:", error);
-        // Clear user details if refresh token fails
         setUserDetail(null);
-        // Redirect user to login page or show appropriate message
-        navigate("/userLogin"); // Redirect to login page if token refresh fails
+        navigate("/userLogin");
       }
     };
 
     if (userDetail) {
       validateRefreshToken();
     }
-  }, [userDetail, navigate]); // Only rerun if userDetail changes
+  }, [userDetail, navigate]); 
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row gap-4 p-6">
-      {/* Left Section */}
       <div className="md:w-1/3 flex flex-col items-center">
         {userDetail ? (
           <div key={userDetail?.id} className="text-yellow-200 w-full max-w-lg">
@@ -77,7 +73,6 @@ const UserDetails = () => {
               </div>
             </div>
 
-            {/* Navigation */}
             <div className="mt-3 bg-white shadow-md border rounded-lg p-4">
               <h2 className="text-gray-700 font-bold text-lg mb-3">
                 Navigation
@@ -108,6 +103,17 @@ const UserDetails = () => {
                       <FaHeadset className="text-purple-500 mr-2" />
                       Helpdesk
                     </Link>
+
+                    <Link
+                      to="/recycle"
+                      className="flex items-center text-gray-600 font-semibold hover:text-red-600 transition"
+                    >
+                      <FaHeadset className="text-purple-500 mr-2" />
+                      Recycle Warehouses
+                    </Link>
+
+
+
 
                     <Link
                       to="/logOut"

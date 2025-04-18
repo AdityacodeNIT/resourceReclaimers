@@ -6,11 +6,11 @@ const SearchResult = () => {
   const { searchResult, childToParent } = useContext(UserContext); // Access the search result from context
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b 	from-[#F0F4F8] to-[#D9E2EC] text-white p-4">
       {/* Title Section */}
       <div className="text-center py-10">
-        <h1 className="text-4xl font-extrabold text-violet-400">🔍 Search Results</h1>
-        <p className="text-lg text-gray-400 mt-2">Find the best stationery & office products.</p>
+        <h1 className="text-4xl font-extrabold text-[#4F46E5]">🔍 Search Results</h1>
+        <p className="text-lg text-gray-600 mt-2">Find the best Refurbished Products.</p>
       </div>
 
       {/* Search Results */}
@@ -19,11 +19,11 @@ const SearchResult = () => {
           {searchResult.map((product) => (
             <Link to="/About" key={product._id}>
               <div
-                className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 p-4 transition-transform transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
+                className="bg-[#ffffff] rounded-lg shadow-lg border border-[#E0E6ED] p-4 transition-transform transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
                 onClick={() => childToParent(product)}
               >
                 {/* Product Image */}
-                <div className="relative overflow-hidden bg-gray-700 rounded-md flex items-center justify-center h-52">
+                <div className="relative overflow-hidden  rounded-md flex items-center justify-center h-52">
                   <img
                     src={product.ProductImage}
                     alt={product.name}
@@ -33,7 +33,7 @@ const SearchResult = () => {
 
                 {/* Product Details */}
                 <div className="mt-4 text-center">
-                  <h2 className="text-lg font-semibold text-white truncate">{product.name}</h2>
+                  <h2 className="text-lg font-semibold text-[#1F2937] truncate">{product.name}</h2>
                   <p className="text-green-400 font-bold text-lg mt-2">₹{product.price}</p>
                 </div>
               </div>

@@ -8,22 +8,35 @@ import {motion} from "framer-motion";
 
 const Home = () => {
     return (
-        <div className="w-full font-sans">
+<div className="w-full font-sans">
             {/* Hero Section */}
-          
-                <div className="p-10 rounded-xl shadow-xl max-w-2xl ">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg shadow-orange-400 leading-tight text-gray-00 ">
-                        Refurbish. Reuse. Resell.
-                    </h1>
-                    <p className="text-lg md:text-xl font-medium mb-6 text-gray-400">
-                        Sell your old electronics and furniture easily. We verify, refurbish, and connect them with new users affordably.
-                    </p>
-                    <Link to="/shop">
-                        <button className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 px-6 py-3 rounded-full text-base font-semibold flex items-center gap-3 shadow-lg hover:scale-105 transition-transform">
-                            Shop Now <FontAwesomeIcon icon={faArrowRight} />
-                        </button>
-                    </Link>
-                </div>
+            <div className="p-6 md:p-10 rounded-xl shadow-xl flex flex-col md:flex-row items-center md:items-start gap-10 w-full">
+  {/* Text Section */}
+  <div className="w-full md:w-1/2 text-center md:text-left lg:mt-12">
+    <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg shadow-orange-400 leading-tight text-gray-900">
+      Refurbish. Reuse. Resell.
+    </h1>
+    <p className="text-lg md:text-xl font-medium mb-6 text-gray-500">
+      Sell your old electronics and furniture easily. We verify, refurbish, and connect them with new users affordably.
+    </p>
+    <Link to="/shop">
+      <button className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 px-6 py-3 rounded-full text-base font-semibold flex items-center gap-3 shadow-lg hover:scale-105 transition-transform mx-auto md:mx-0">
+        Shop Now <FontAwesomeIcon icon={faArrowRight} />
+      </button>
+    </Link>
+  </div>
+
+  {/* Image Section */}
+  <div className="w-full md:w-1/2">
+    <img
+      src="logopc.png"
+      alt="Refurbish"
+      className="w-full max-h-[400px]  rounded-xl shadow-lg"
+    />
+  </div>
+</div>
+
+
            
 
             {/* How It Works Section */}
@@ -38,7 +51,7 @@ const Home = () => {
                         <p className="text-gray-700 mb-3">
                             List your unused or damaged electronics, furniture, or home appliances. Our field agent will verify the condition, and after refurbishment by our expert technicians, we resell the certified product on our platform.
                         </p>
-                        <Link to="/sell" className="text-green-600 font-semibold hover:underline">
+                        <Link to="/seller" className="text-green-600 font-semibold hover:underline">
                             Start Selling →
                         </Link>
                     </div>

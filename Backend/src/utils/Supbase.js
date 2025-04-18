@@ -21,9 +21,10 @@ const sendEmail = async (name, email) => {
   const mailOptions = {
     from: process.env.EMAIL,
     to: email,
-    subject: 'Welcome to Resource Reclaimers!',
-    text: `Hi ${name},\n\nThank you for subscribing! We're excited to have you onboard.`,
+    subject: '🎉 Welcome to Resource Reclaimers, [Your Name]! 🎉',
+    text: `Hi ${name},\n\nWe're thrilled to have you join the Resource Reclaimers family! 🌟\n\nAt Resource Reclaimers, we're passionate about making a difference, and we're so excited to have someone as unique as you on board. Get ready to explore, create, and reclaim resources in ways you never imagined!\n\nIf you ever have questions or need support, our team is just an email away. Let's make a positive impact together.\n\nWelcome aboard!\n\nWarm regards,\nThe Resource Reclaimers Team 🚀`,
   };
+
 
   try {
     await transporter.sendMail(mailOptions);
