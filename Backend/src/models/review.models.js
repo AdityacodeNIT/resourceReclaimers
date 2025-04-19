@@ -12,11 +12,19 @@ const reviewSchema = new Schema(
                         ref: "Product",
                 },
 
-                message: {
+                description: {
                         type: String,
+                        
+                },
+                userId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        required: true,
+                        ref: "User",
                 },
         },
         { timestamps: true },
 );
+
+reviewSchema.index({ productId: 1, userId: 1 }, { unique: true });
 
 export const Review = mongoose.model("reviewSchema", reviewSchema);

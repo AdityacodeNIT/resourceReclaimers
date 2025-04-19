@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useMemo} from "react";
 import UserContext from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -346,7 +346,8 @@ useEffect(() => {
       axios
         .post(
           `${import.meta.env.VITE_API_URL}/api/v2/feedback/review`,
-          productReview
+          productReview,
+          { withCredentials: true }
         )
         .catch((error) => {
           console.error("There was an error posting the review!", error);
@@ -378,6 +379,51 @@ useEffect(() => {
         });
     }
   }, [productId, productReview]);
+
+
+  const [gotReview, setGotReview] = useState(null);
+
+  const reviewsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const getReview = async (bookId) => {
+    if (!bookId) return;
+    
+ 
+    setGotReview([]);
+    setCurrentPage(1); // Reset to the first page when fetching new reviews 
+  
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v2/feedback/getReview/${bookId}`);
+      setGotReview(response.data);
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+    }
+  };
+  
+
+
+  const indexOfLastReview = useMemo(
+    () => currentPage * reviewsPerPage,
+    [currentPage]
+  );
+  const indexOfFirstReview = useMemo(
+    () => indexOfLastReview - reviewsPerPage,
+    [indexOfLastReview]
+  );
+  const currentReviews = useMemo(
+    () => (gotReview || []).slice(indexOfFirstReview, indexOfLastReview),
+    [gotReview, indexOfFirstReview, indexOfLastReview]
+  );
+
+  console.log(currentReviews);
+  
+  const totalPages = useMemo(
+    () => Math.ceil((gotReview || []).length / reviewsPerPage),
+    [gotReview]
+  );
+
+
 
   // State to manage search results.
   const [searchResult, setSearchResult] = useState([]);
@@ -441,8 +487,7 @@ useEffect(() => {
         setOrderSuccess,
         handleAddToCart,
         notification,
-     
-     
+     getReview,
         handleSearch,
         searchResult,
         orderDetails,
@@ -457,7 +502,11 @@ useEffect(() => {
         averageRatings,
         setAddressId,
         sellerDetail,
-        getSellerDetail
+        getSellerDetail,setGotReview,
+        currentPage,
+        currentReviews,
+        setCurrentPage,
+        totalPages,
       }}
     >
       {children}

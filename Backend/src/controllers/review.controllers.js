@@ -4,21 +4,19 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Review } from "../models/review.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-// Function to add a review
 const review = asyncHandler(async (req, res) => {
-        const { rating, productId, message } = req.body;
-        // Add new review
-        const reviews = await Review.create({ rating, productId, message });
+        const { rating, productId, description } = req.body;
 
-        // Return the created review and the total count of reviews
+        const userId = req.user._id;
+        const reviews = await Review.create({ rating, productId,description,userId });
+
         return res.status(201).json(new ApiResponse(200, reviews));
 });
 
 const averageReview = asyncHandler(async (req, res) => {
         const { productId } = req.body;
-        // Convert productId to ObjectId
+  
         const objectId = new ObjectId(productId);
-        // Aggregation to calculate the average rating for the product
         const result = await Review.aggregate([
                 {
                         $match: { productId: objectId },
@@ -37,4 +35,19 @@ const averageReview = asyncHandler(async (req, res) => {
         return res.json({ averageRating, count });
 });
 
-export { review, averageReview };
+const getReview = asyncHandler(async (req, res) => {
+        const id = req.params.id;
+      
+        const reviews = await Review.find({ productId: new ObjectId(id) }).populate(
+          "userId",
+          "fullName"
+        );
+      
+        if (!reviews.length) {
+          throw new ApiError(404, "No reviews found");
+        }
+      
+        res.json(reviews);
+      });
+
+export { review, averageReview,getReview };
