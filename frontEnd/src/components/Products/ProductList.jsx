@@ -41,7 +41,7 @@ const ProductList = () => {
         </h2>
 
         {isLoading ? (
-          <p className="text-center text-gray-600 text-lg">Loading products...</p>
+          <p className="text-center text-gray-600 text-lg">Loading products..</p>
         ) : error ? (
           <p className="text-center text-red-500 text-lg">{error}</p>
         ) : productsData.length === 0 ? (
