@@ -111,7 +111,7 @@
 
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 
 const UserLogin = () => {
@@ -197,9 +197,9 @@ const UserLogin = () => {
 
         <p className="mt-4 text-center text-gray-400">
           Forgot password?{" "}
-          <a href="#" className="text-gray-300 hover:underline">
+          <Link  to="/resetpass" className="text-gray-300 hover:underline">
             Reset here
-          </a>
+          </Link>
         </p>
       </div>
     </div>

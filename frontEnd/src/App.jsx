@@ -51,6 +51,7 @@ import AdminProductReview from "./components/Admin/AdminProductReview.jsx";
 import RefurbsihedControl from "./components/Admin/Refurbished/RefurbishedControl.jsx";
 import Dashboard from "./components/Admin/Recycling/DashBoard.jsx";
 import Todos from "./compo/Todos.jsx";
+import ResetPassword from "./components/User/ResetPassword.jsx";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
           <Route path="/Aboutus" element={<About />} />
           <Route path="/register" element={<Register />} />
           <Route path="/userLogin" element={<Userlogin />} />
+          <Route path="/resetpass" element={<ResetPassword/>}/>
           <Route path="/user" element={<UserDetails />} />
           <Route path="/logout" element={<Logout />} />
          

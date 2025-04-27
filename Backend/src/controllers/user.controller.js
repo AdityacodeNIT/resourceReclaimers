@@ -4,6 +4,8 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import Jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { sendOTP } from "../utils/Nodemailer.js";
 
 /*this is the function for generating access tokenwhere we can use these
                 token by exporting them from dataset because they are quite common*/
@@ -230,7 +232,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             try {
                 Jwt.verify(currentAccessToken, process.env.ACCESS_TOKEN_SECRET);  // Try to verify it
                 
-                // If the access token is still valid, no need to refresh
                 return res.status(200).json(new ApiResponse(200, "Access token is still valid"));
             } catch (err) {
                 // If the access token is invalid or expired, generate a new one
@@ -360,6 +361,73 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
                         ),
                 );
 });
+
+
+const requestPasswordResetOTP = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) throw new ApiError(400, "Email is required");
+
+  const user = await User.findOne({ email });
+  if (!user) throw new ApiError(404, "User not found");
+
+  // Generate a 6-digit OTP
+  const otp = crypto.randomInt(100000, 999999).toString();
+
+  user.resetPasswordOTP = otp;
+  user.resetPasswordOTPExpiry = Date.now() + 15 * 60 * 1000; // 15 minutes expiry
+  await user.save({ validateBeforeSave: false });
+
+  try {
+    // Send OTP via email
+    await sendOTP(user.email, otp);
+  } catch (error) {
+    console.error("Failed to send OTP:", error);
+    throw new ApiError(500, "Could not send OTP email");
+  }
+
+  res.status(200).json(new ApiResponse(200, {}, "OTP sent to your email"));
+});
+
+
+const resetPasswordWithOTP = asyncHandler(async (req, res) => {
+        const { email, otp, newPassword, confirmPassword } = req.body;
+      
+
+      
+        if (!(email && otp && newPassword && confirmPassword)) {
+          throw new ApiError(400, "All fields are required");
+        }
+      
+        if (newPassword !== confirmPassword) {
+          throw new ApiError(400, "Passwords do not match");
+        }
+      
+        const user = await User.findOne({ email });
+        if (!user) throw new ApiError(404, "User not found");
+        if (
+          !user.resetPasswordOTP ||
+          user.resetPasswordOTP !== otp ||
+          Date.now() > user.resetPasswordOTPExpiry
+        ) {
+          throw new ApiError(400, "Invalid or expired OTP");
+        }
+      
+        user.password = newPassword;
+        user.resetPasswordOTP = undefined;
+        user.resetPasswordOTPExpiry = undefined;
+      
+        await user.save();
+      
+        return res
+          .status(200)
+          .json(new ApiResponse(200, {}, "Password reset successful"));
+      });
+
+
+
+
+
 export {
         registerUser,
         loginUser,
@@ -369,4 +437,6 @@ export {
         changePassword,
         updateAccountdetail,
         updateUserAvatar,
+        requestPasswordResetOTP,
+        resetPasswordWithOTP,
 };

@@ -47,6 +47,8 @@ const userSchema = new Schema(
                         enum: ["customer", "seller", "admin", "superadmin"],
                         default: "customer",
                     },
+                    resetPasswordOTP: { type: String, default: null },
+                    resetPasswordOTPExpiry: { type: Date, default: null },
         },
         { timestamp: true },
 );

@@ -7,6 +7,8 @@ import {
         updateAccountdetail,
         updateUserAvatar,
         changePassword,
+        requestPasswordResetOTP,
+        resetPasswordWithOTP
 } from "../controllers/user.controller.js";
 
 import { updateUserRole, userlist,deleteUser } from "../controllers/admin.controllers.js";
@@ -57,6 +59,11 @@ router.route("/deleteUser/:id").delete(verifyJWT, verifyRole("superadmin"), dele
 router.route("/userList").get(verifyJWT, verifyRole("superadmin"), userlist);
 
 router.route("/updateUserPost/:id").post(verifyJWT, verifyRole("superadmin"), updateUserRole);
+
+router.route("/request-reset-password").post(requestPasswordResetOTP);
+
+// Route to reset password using OTP
+router.route("/reset-password").post(resetPasswordWithOTP);
 
 
 
