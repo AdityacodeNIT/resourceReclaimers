@@ -13,7 +13,17 @@ export const sendOTP = async (email, otp) => {
     from: process.env.EMAIL,
     to: email,
     subject: "Your OTP for Login",
-    text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
+    text: `Dear User, 
+
+Your OTP for resetting your password is: ${otp}.
+This OTP is valid for 5 minutes from the time of request. Please ensure to enter it within this time frame.
+
+For security reasons, do not share this OTP with anyone.
+
+If you did not request a password reset, please disregard this message.
+
+Thank you, 
+The RESOURCE_RECLAIMERS Team.`,
   };
 
   try {

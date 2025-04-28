@@ -100,7 +100,7 @@ const RecyclingForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      {details ? (
+      {details && details.warehouseName  ? (
         !isEditing ? (
           <div>
             <h2 className="text-2xl font-bold text-gray-700 text-center mb-6">Warehouse Details</h2>
@@ -183,7 +183,7 @@ const RecyclingForm = () => {
           <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
             Submit
           </button>
-          <button onClick={handleGet} className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition ml-4">
+          <button onClick={handleEdit} className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition ml-4">
             Get Data
           </button>
         </div>
