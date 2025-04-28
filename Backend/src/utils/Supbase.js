@@ -6,7 +6,7 @@ import 'dotenv/config'; // Load environment variables
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 
-// Nodemailer Transporter
+// Nodemailer Transpot
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Change if using another SMTP provider
   auth: {
