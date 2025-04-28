@@ -84,7 +84,7 @@ const UpdateUserAccountDetails = () => {
               type="submit"
               className="w-full p-3 bg-blue-800 text-white font-bold rounded-md transition duration-200 hover:bg-rose-600"
             >
-              Login
+              Update Details
             </button>
           </form>
         </div>
