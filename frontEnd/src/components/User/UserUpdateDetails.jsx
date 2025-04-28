@@ -27,9 +27,11 @@ const UserUpdateDetails = () => {
         UpdateData,
         {
           withCredentials: true,
-          credentials: "include",
         }
       );
+
+      console.log(response.data);
+      getUserDetail(response.data);
 
       if (!response) {
         console.error("Unable to Update");
@@ -37,11 +39,16 @@ const UserUpdateDetails = () => {
       }
 
       if (response.status >= 200 && response.status < 300) {
-        navigate("/user");
+      
 
-        // Navigate the user to the home page
+          console.log("value",response.data);
+       
+          getUserDetail(response.data);
+  
+        navigate("/user");
       }
-      getUserDetail(response.data);
+    
+   
     } catch (error) {
       console.error("Issue in updating user details", error);
       // Handle the error

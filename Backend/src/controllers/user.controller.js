@@ -297,32 +297,59 @@ const getCurrentUser = asyncHandler(async (req, res) => {
                 );
 });
 
+
 const updateAccountdetail = asyncHandler(async (req, res) => {
         const { fullName, email } = req.body;
 
         if (!(fullName || email)) {
-                throw new ApiError(400, "All feilds are required");
+                throw new ApiError(400, "At least one field is required");
         }
-        const updateuser = await User.findByIdAndUpdate(
+
+        // Update user info
+        const updatedUser = await User.findByIdAndUpdate(
                 req.user?._id,
                 {
                         $set: {
-                                fullName,
-                                email: email,
+                                ...(fullName && { fullName }),
+                                ...(email && { email }),
                         },
                 },
-                { new: true },
-        ).select("-password");
+                { new: true }
+        );
+
+        if (!updatedUser) {
+                throw new ApiError(404, "User not found");
+        }
+
+        // Generate new tokens
+        const { accessToken, refreshToken } = await generateAccessAndRefreshtoken(updatedUser._id);
+
+        // Get full updated user object
+        const userData = await User.findById(updatedUser._id).select("-password");
+
+        const options = {
+                httpOnly: true,
+                secure: true,
+                sameSite: "None",
+        };
+
         return res
                 .status(200)
+                .cookie("accessToken", accessToken, options)
+                .cookie("refreshToken", refreshToken, options)
                 .json(
                         new ApiResponse(
                                 200,
-                                updateuser,
-                                "Account details updated succesfully",
-                        ),
+                                {
+                                        user: userData,
+                                        accessToken,
+                                        refreshToken,
+                                },
+                                "Account details updated successfully"
+                        )
                 );
 });
+    
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
         

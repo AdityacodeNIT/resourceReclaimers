@@ -6,7 +6,7 @@ import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 
 const UpdateUserAccountDetails = () => {
-  const { getUserDetail } = useContext(UserContext);
+  const { getUserDetail} = useContext(UserContext);
   const [updateData, setUpdatedata] = useState({
     fullName: "",
     email: "",
@@ -34,17 +34,22 @@ const UpdateUserAccountDetails = () => {
         }
       );
 
+    
+
       if (!response) {
         console.error("check the data it is unable to update");
       }
       if (response.status >= 200 && response.status < 300) {
-        // document.cookie = `accessToken=${response.data.data.accessToken}; path=/`;
+      
         getUserDetail(response.data);
-
         navigate("/user");
+
+        
       }
     } catch (error) {
+
       console.error("Issue in updates", error);
+      
     }
   };
 
